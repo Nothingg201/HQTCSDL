@@ -72,17 +72,28 @@ CREATE TABLE product_inventory (
 CREATE TABLE orders (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status VARCHAR(30) NOT NULL DEFAULT 'pending',
-  total DECIMAL(10,2) NOT NULL DEFAULT 0
+  total_price DECIMAL(10,2),
+  status VARCHAR(50) DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE order_items (
   id INT AUTO_INCREMENT PRIMARY KEY,
   order_id INT NOT NULL,
-  product_id INT NOT NULL,
-  quantity INT NOT NULL,
-  unit_price DECIMAL(10,2) NOT NULL
+  product_name VARCHAR(255),
+  price DECIMAL(10,2),
+  quantity INT,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
+
+CREATE TABLE payments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  order_id INT NOT NULL,
+  payment_method VARCHAR(50),
+  amount DECIMAL(10,2),
+  status VARCHAR(50),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
 );
 
 INSERT INTO users (name, email, phone, address, city, country) VALUES
@@ -125,14 +136,19 @@ INSERT INTO product_reviews (product_id, user_id, rating, comment) VALUES
 (3, 1, 4, 'Bàn phím gõ rất thoải mái'),
 (4, 2, 5, 'Màn hình sắc nét, giá cả hợp lý');
 
-INSERT INTO orders (user_id, status, total) VALUES
-(1, 'paid', 16340000),
-(2, 'pending', 4580000),
-(3, 'shipped', 2190000);
+INSERT INTO orders (user_id, total_price, status) VALUES
+(1, 16340000, 'paid'),
+(2, 4580000, 'pending'),
+(3, 2190000, 'shipped');
 
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
-(1, 1, 1, 15990000),
-(1, 2, 1, 350000),
-(2, 4, 1, 3890000),
-(2, 5, 1, 690000),
-(3, 3, 1, 2190000);
+INSERT INTO order_items (order_id, product_name, price, quantity) VALUES
+(1, 'Laptop Acer Aspire 5', 15990000, 1),
+(1, 'Mouse Logitech M331', 350000, 1),
+(2, 'Monitor Dell 24 inch', 3890000, 1),
+(2, 'USB-C Hub 7 in 1', 690000, 1),
+(3, 'Keyboard Keychron K2', 2190000, 1);
+
+INSERT INTO payments (order_id, payment_method, amount, status) VALUES
+(1, 'credit_card', 16340000, 'completed'),
+(2, 'bank_transfer', 4580000, 'pending'),
+(3, 'e_wallet', 2190000, 'completed');
