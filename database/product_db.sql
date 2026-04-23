@@ -1,29 +1,7 @@
-DROP DATABASE IF EXISTS microservices_db;
-CREATE DATABASE microservices_db;
-USE microservices_db;
-
-CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(150) NOT NULL UNIQUE,
-  phone VARCHAR(20),
-  address VARCHAR(255),
-  city VARCHAR(100),
-  country VARCHAR(100),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE user_profiles (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL UNIQUE,
-  bio TEXT,
-  avatar_url VARCHAR(255),
-  status VARCHAR(50) DEFAULT 'active',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+-- Product Service Database (Production)
+DROP DATABASE IF EXISTS product_db;
+CREATE DATABASE product_db;
+USE product_db;
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -69,38 +47,6 @@ CREATE TABLE product_inventory (
   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
-CREATE TABLE orders (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status VARCHAR(30) NOT NULL DEFAULT 'pending',
-  total DECIMAL(10,2) NOT NULL DEFAULT 0
-);
-
-CREATE TABLE order_items (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  order_id INT NOT NULL,
-  product_id INT NOT NULL,
-  quantity INT NOT NULL,
-  unit_price DECIMAL(10,2) NOT NULL
-);
-
-INSERT INTO users (name, email, phone, address, city, country) VALUES
-('Nguyễn Văn An', 'an.nguyen@example.com', '0901000001', '123 Tran Hung Dao', 'Ha Noi', 'Vietnam'),
-('Trần Thị Bình', 'binh.tran@example.com', '0901000002', '456 Nguyen Hue', 'Ho Chi Minh', 'Vietnam'),
-('Lê Quang Cường', 'cuong.le@example.com', '0901000003', '789 Chu Van An', 'Da Nang', 'Vietnam'),
-('Nguyễn Đình Vinh Lộc', 'loc@gmail.com', '0902000001', '321 Le Loi', 'Ha Noi', 'Vietnam'),
-('Bùi Thái Sơn', 'son@gmail.com', '0902000002', '654 Ly Tu Trong', 'Ho Chi Minh', 'Vietnam'),
-('Lê Hoài Nam', 'nam@gmail.com', '0902000003', '987 Dinh Tien Hoang', 'Can Tho', 'Vietnam');
-
-INSERT INTO user_profiles (user_id, bio, status) VALUES
-(1, 'Software Developer', 'active'),
-(2, 'Product Manager', 'active'),
-(3, 'Designer', 'active'),
-(4, 'Data Analyst', 'active'),
-(5, 'DevOps Engineer', 'active'),
-(6, 'QA Engineer', 'active');
-
 INSERT INTO categories (name, description) VALUES
 ('Laptop', 'Máy tính xách tay'),
 ('Phụ kiện', 'Phụ kiện máy tính'),
@@ -124,15 +70,3 @@ INSERT INTO product_reviews (product_id, user_id, rating, comment) VALUES
 (2, 3, 5, 'Chuột rất nhạy, rất hài lòng'),
 (3, 1, 4, 'Bàn phím gõ rất thoải mái'),
 (4, 2, 5, 'Màn hình sắc nét, giá cả hợp lý');
-
-INSERT INTO orders (user_id, status, total) VALUES
-(1, 'paid', 16340000),
-(2, 'pending', 4580000),
-(3, 'shipped', 2190000);
-
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
-(1, 1, 1, 15990000),
-(1, 2, 1, 350000),
-(2, 4, 1, 3890000),
-(2, 5, 1, 690000),
-(3, 3, 1, 2190000);
