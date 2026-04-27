@@ -144,5 +144,3 @@ app.post("/orders", async (req, res) => {
 app.listen(process.env.PORT, () => {
     console.log(`Order Service running on port ${process.env.PORT}`);
 });
-
-axios.get(`${process.env.USER_SERVICE_URL}/users/${order.user_id}`)

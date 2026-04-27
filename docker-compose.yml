@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      # Hệ thống sẽ tự động chạy các script .sql trong thư mục mapped vào initdb.d theo bảng chữ cái.
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    networks:
+      - microservices-network
+
+  user-service:
+    build: 
+      context: ./user-service
+    container_name: user-service
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DB_HOST=mysql-db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASS=rootpassword
+      - DB_NAME=user_db
+    depends_on:
+      - mysql-db
+    networks:
+      - microservices-network
+
+  product-service:
+    build: 
+      context: ./product-service
+    container_name: product-service
+    restart: always
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - DB_HOST=mysql-db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=product_db
+    depends_on:
+      - mysql-db
+    networks:
+      - microservices-network
+
+  order-service:
+    build: 
+      context: ./order-service
+    container_name: order-service
+    restart: always
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - DB_HOST=mysql-db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=order_db
+      - USER_SERVICE_URL=http://user-service:3001
+    depends_on:
+      - mysql-db
+      - user-service
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
