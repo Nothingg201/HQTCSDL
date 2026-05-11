@@ -139,6 +139,92 @@ app.post("/orders", async (req, res) => {
 });
 
 // =============================
+// UPDATE ORDER
+// =============================
+app.put("/orders/:id", async (req, res) => {
+    const { id } = req.params;
+    const { user_id, items } = req.body;
+
+    let total = 0;
+    items.forEach(item => {
+        total += item.price * item.quantity;
+    });
+
+    const connection = await db.getConnection();
+
+    try {
+        await connection.beginTransaction();
+
+        const [updateResult] = await connection.query(
+            "UPDATE orders SET user_id = ?, total_price = ? WHERE id = ?",
+            [user_id, total, id]
+        );
+
+        if (updateResult.affectedRows === 0) {
+            await connection.rollback();
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        await connection.query(
+            "DELETE FROM order_items WHERE order_id = ?",
+            [id]
+        );
+
+        for (let item of items) {
+            await connection.query(
+                "INSERT INTO order_items (order_id, product_name, price, quantity) VALUES (?, ?, ?, ?)",
+                [id, item.product_name, item.price, item.quantity]
+            );
+        }
+
+        await connection.commit();
+
+        res.json({ message: "Order updated" });
+    } catch (err) {
+        await connection.rollback();
+        res.status(500).json({ error: err.message });
+    } finally {
+        connection.release();
+    }
+});
+
+// =============================
+// DELETE ORDER
+// =============================
+app.delete("/orders/:id", async (req, res) => {
+    const { id } = req.params;
+    const connection = await db.getConnection();
+
+    try {
+        await connection.beginTransaction();
+
+        await connection.query(
+            "DELETE FROM order_items WHERE order_id = ?",
+            [id]
+        );
+
+        const [result] = await connection.query(
+            "DELETE FROM orders WHERE id = ?",
+            [id]
+        );
+
+        if (result.affectedRows === 0) {
+            await connection.rollback();
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        await connection.commit();
+
+        res.json({ message: "Order deleted" });
+    } catch (err) {
+        await connection.rollback();
+        res.status(500).json({ error: err.message });
+    } finally {
+        connection.release();
+    }
+});
+
+// =============================
 // START SERVER
 // =============================
 app.listen(process.env.PORT, () => {

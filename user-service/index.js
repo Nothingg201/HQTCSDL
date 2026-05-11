@@ -68,6 +68,55 @@ app.get('/users/:id', (req, res) => {
   });
 });
 
+// Tạo user mới
+app.post('/users', (req, res) => {
+  const { name, email } = req.body;
+  const sql = 'INSERT INTO users (name, email) VALUES (?, ?)';
+
+  pool.query(sql, [name, email], (err, result) => {
+    if (err) {
+      console.error('DB ERROR:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    res.status(201).json({ message: 'User created', user_id: result.insertId });
+  });
+});
+
+// Cập nhật user
+app.put('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  const { name, email } = req.body;
+  const sql = 'UPDATE users SET name = ?, email = ? WHERE id = ?';
+
+  pool.query(sql, [name, email, userId], (err, result) => {
+    if (err) {
+      console.error('DB ERROR:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({ message: 'User updated' });
+  });
+});
+
+// Xóa user
+app.delete('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  const sql = 'DELETE FROM users WHERE id = ?';
+
+  pool.query(sql, [userId], (err, result) => {
+    if (err) {
+      console.error('DB ERROR:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({ message: 'User deleted' });
+  });
+});
+
 // Cấu hình port
 const PORT = process.env.PORT || 3001;
 

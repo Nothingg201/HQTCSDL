@@ -66,6 +66,47 @@ app.post("/products", async (req, res) => {
     }
 });
 
+// Cập nhật thông tin sản phẩm
+app.put("/products/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, price, stock } = req.body;
+
+        const [result] = await db.query(
+            "UPDATE products SET name = ?, price = ?, stock = ? WHERE id = ?",
+            [name, price, stock, id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        res.json({ message: "Product updated successfully" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Xóa sản phẩm
+app.delete("/products/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const [result] = await db.query(
+            "DELETE FROM products WHERE id = ?",
+            [id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        res.json({ message: "Product deleted successfully" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
     console.log(`Product Service running on port ${PORT}`);
