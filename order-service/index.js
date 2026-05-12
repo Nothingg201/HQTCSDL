@@ -16,6 +16,12 @@ const db = mysql.createPool({
     database: process.env.DB_NAME
 });
 
+
+app.get('/', (req, res) => {
+  res.json({ message: 'User service is running' });
+});
+
+
 // =============================
 // GET ALL ORDERS + USER INFO
 // =============================
