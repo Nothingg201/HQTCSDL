@@ -97,12 +97,12 @@ CREATE TABLE payments (
 );
 
 INSERT INTO users (name, email, phone, address, city, country) VALUES
-('Nguyễn Văn An', 'an.nguyen@example.com', '0901000001', '123 Tran Hung Dao', 'Ha Noi', 'Vietnam'),
-('Trần Thị Bình', 'binh.tran@example.com', '0901000002', '456 Nguyen Hue', 'Ho Chi Minh', 'Vietnam'),
-('Lê Quang Cường', 'cuong.le@example.com', '0901000003', '789 Chu Van An', 'Da Nang', 'Vietnam'),
-('Nguyễn Đình Vinh Lộc', 'loc@gmail.com', '0902000001', '321 Le Loi', 'Ha Noi', 'Vietnam'),
-('Bùi Thái Sơn', 'son@gmail.com', '0902000002', '654 Ly Tu Trong', 'Ho Chi Minh', 'Vietnam'),
-('Lê Hoài Nam', 'nam@gmail.com', '0902000003', '987 Dinh Tien Hoang', 'Can Tho', 'Vietnam');
+('Nguyen Van An', 'an.nguyen@example.com', '0901000001', '123 Tran Hung Dao', 'Ha Noi', 'Vietnam'),
+('Tran Thi Binh', 'binh.tran@example.com', '0901000002', '456 Nguyen Hue', 'Ho Chi Minh', 'Vietnam'),
+('Le Quang Cuong', 'cuong.le@example.com', '0901000003', '789 Chu Van An', 'Da Nang', 'Vietnam'),
+('Nguyen Dinh Vinh Loc', 'loc@gmail.com', '0902000001', '321 Le Loi', 'Ha Noi', 'Vietnam'),
+('Bui Thai Son', 'son@gmail.com', '0902000002', '654 Ly Tu Trong', 'Ho Chi Minh', 'Vietnam'),
+('Le Hoai Nam', 'nam@gmail.com', '0902000003', '987 Dinh Tien Hoang', 'Can Tho', 'Vietnam');
 
 INSERT INTO user_profiles (user_id, bio, status) VALUES
 (1, 'Software Developer', 'active'),
@@ -113,28 +113,28 @@ INSERT INTO user_profiles (user_id, bio, status) VALUES
 (6, 'QA Engineer', 'active');
 
 INSERT INTO categories (name, description) VALUES
-('Laptop', 'Máy tính xách tay'),
-('Phụ kiện', 'Phụ kiện máy tính'),
-('Màn hình', 'Thiết bị hiển thị'),
-('Lưu trữ', 'Thiết bị lưu trữ dữ liệu'),
-('Gaming', 'Thiết bị gaming');
+('Laptop', 'May tinh xach tay'),
+('Phu kien', 'Phu kien may tinh'),
+('Man hinh', 'Thiet bi hien thi'),
+('Luu tru', 'Thiet bi luu tru du lieu'),
+('Gaming', 'Thiet bi gaming');
 
 INSERT INTO products (category_id, name, description, price, cost, stock, sku, status) VALUES
 (1, 'Laptop Acer Aspire 5', 'Intel Core i5, 8GB RAM, 512GB SSD', 15990000, 12000000, 12, 'ACER-AS5-001', 'active'),
-(2, 'Mouse Logitech M331', 'Chuột wireless 2.4GHz', 350000, 200000, 50, 'LOG-M331-001', 'active'),
-(2, 'Keyboard Keychron K2', 'Bàn phím cơ wireless', 2190000, 1500000, 20, 'KEY-K2-001', 'active'),
+(2, 'Mouse Logitech M331', 'Chuot wireless 2.4GHz', 350000, 200000, 50, 'LOG-M331-001', 'active'),
+(2, 'Keyboard Keychron K2', 'Ban phim co wireless', 2190000, 1500000, 20, 'KEY-K2-001', 'active'),
 (3, 'Monitor Dell 24 inch', 'Full HD 1920x1080, 60Hz', 3890000, 2500000, 15, 'DELL-24-001', 'active'),
-(2, 'USB-C Hub 7 in 1', 'Hub mở rộng cổng', 690000, 400000, 30, 'HUB-USB-001', 'active'),
+(2, 'USB-C Hub 7 in 1', 'Hub mo rong cong', 690000, 400000, 30, 'HUB-USB-001', 'active'),
 (1, 'Laptop Dell XPS 13', 'Intel Core i7, 16GB RAM, 512GB SSD', 25990000, 20000000, 8, 'DELL-XPS13-001', 'active'),
 (3, 'Monitor ASUS 27 inch', '4K 3840x2160, 60Hz', 8990000, 6000000, 5, 'ASUS-27-001', 'active'),
 (5, 'Gaming Mouse Razer DeathAdder', 'RGB, 16000 DPI', 1290000, 800000, 25, 'RAZ-DA-001', 'active');
 
 INSERT INTO product_reviews (product_id, user_id, rating, comment) VALUES
-(1, 1, 5, 'Sản phẩm rất tốt, giao hàng nhanh'),
-(1, 2, 4, 'Chất lượng tốt, giá hợp lý'),
-(2, 3, 5, 'Chuột rất nhạy, rất hài lòng'),
-(3, 1, 4, 'Bàn phím gõ rất thoải mái'),
-(4, 2, 5, 'Màn hình sắc nét, giá cả hợp lý');
+(1, 1, 5, 'San pham rat tot, giao hang nhanh'),
+(1, 2, 4, 'Chat luong tot, gia hop ly'),
+(2, 3, 5, 'Chuot rat nhay, rat hai long'),
+(3, 1, 4, 'Ban phim go rat thoai mai'),
+(4, 2, 5, 'Man hinh sac net, gia ca hop ly');
 
 INSERT INTO orders (user_id, total_price, status) VALUES
 (1, 16340000, 'paid'),

@@ -34,12 +34,12 @@ CREATE TABLE users (
     email VARCHAR(255)
 );
 INSERT INTO users (name, email) VALUES
-('Nguyễn Đình Vinh Lộc', 'loc@gmail.com'),
-('Bùi Thái Sơn', 'son@gmail.com'),
-('Lê Hoài Nam', 'nam@gmail.com'),
-('Trần Thị Phương Thảo', 'thao@gmail.com'),
-('Nguyễn Phú Lâm', 'lam@gmail.com'),
-('Phạm Quang Nhật', 'nhat@gmail.com');
+('Nguyen Dinh Vinh Loc', 'loc@gmail.com'),
+('Bui Thai Son', 'son@gmail.com'),
+('Le Hoai Nam', 'nam@gmail.com'),
+('Tran Thi Phuong Thao', 'thao@gmail.com'),
+('Nguyen Phu Lam', 'lam@gmail.com'),
+('Pham Quang Nhat', 'nhat@gmail.com');
 INSERT INTO orders (user_id, total_price, status) VALUES
 (1, 1500000, 'pending'),
 (2, 800000, 'completed'),

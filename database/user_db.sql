@@ -27,12 +27,12 @@ CREATE TABLE user_profiles (
 );
 
 INSERT INTO users (name, email, phone, address, city, country) VALUES
-('Nguyễn Văn An', 'an.nguyen@example.com', '0901000001', '123 Tran Hung Dao', 'Ha Noi', 'Vietnam'),
-('Trần Thị Bình', 'binh.tran@example.com', '0901000002', '456 Nguyen Hue', 'Ho Chi Minh', 'Vietnam'),
-('Lê Quang Cường', 'cuong.le@example.com', '0901000003', '789 Chu Van An', 'Da Nang', 'Vietnam'),
-('Nguyễn Đình Vinh Lộc', 'loc@gmail.com', '0902000001', '321 Le Loi', 'Ha Noi', 'Vietnam'),
-('Bùi Thái Sơn', 'son@gmail.com', '0902000002', '654 Ly Tu Trong', 'Ho Chi Minh', 'Vietnam'),
-('Lê Hoài Nam', 'nam@gmail.com', '0902000003', '987 Dinh Tien Hoang', 'Can Tho', 'Vietnam');
+('Nguyen Van An', 'an.nguyen@example.com', '0901000001', '123 Tran Hung Dao', 'Ha Noi', 'Vietnam'),
+('Tran Thi Binh', 'binh.tran@example.com', '0901000002', '456 Nguyen Hue', 'Ho Chi Minh', 'Vietnam'),
+('Le Quang Cuong', 'cuong.le@example.com', '0901000003', '789 Chu Van An', 'Da Nang', 'Vietnam'),
+('Nguyen Dinh Vinh Loc', 'loc@gmail.com', '0902000001', '321 Le Loi', 'Ha Noi', 'Vietnam'),
+('Bui Thai Son', 'son@gmail.com', '0902000002', '654 Ly Tu Trong', 'Ho Chi Minh', 'Vietnam'),
+('Le Hoai Nam', 'nam@gmail.com', '0902000003', '987 Dinh Tien Hoang', 'Can Tho', 'Vietnam');
 
 INSERT INTO user_profiles (user_id, bio, status) VALUES
 (1, 'Software Developer', 'active'),
