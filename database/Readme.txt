@@ -50,6 +50,18 @@ order_db.sql (📋 Order Service)
     * payments - Thông tin thanh toán
   - Dữ liệu mẫu: 3 orders, 5 order items, 3 payments
 
+
+BACKUP FILE (💾)
+----------------
+
+backup_20260405.sql
+  - Mục đích: Backup toàn bộ database cho dev environment
+  - Tương tự: microservices_full.sql
+  - Database name: microservices_db
+  - Dùng khi: Cần restore lại toàn bộ database từ backup
+  - Cách restore: mysql -u root -p < backup_20260405.sql
+  - Dữ liệu: Bao gồm đầy đủ schema và dữ liệu mẫu
+
 ================================================================================
 CÁCH SỬ DỤNG
 ================================================================================
@@ -69,6 +81,18 @@ MySQL Workbench:
 phpMyAdmin:
   1. Truy cập phpMyAdmin
   2. Tab Import → Chọn microservices_full.sql → Go
+
+RESTORE FROM BACKUP (💾)
+------------------------
+
+Command Line:
+  # Restore từ backup file
+  mysql -u root -p < backup_20260405.sql
+
+MySQL Workbench:
+  1. Mở MySQL Workbench
+  2. File → Open SQL Script → backup_20260405.sql
+  3. Execute (Ctrl + Shift + Enter)
 
 
 PRODUCTION SETUP (🚀)
@@ -234,6 +258,12 @@ Lỗi: "Can't find file"
 Database không xuất hiện sau import
   - Kiểm tra output có "Query OK" không
   - Refresh database list trong MySQL Workbench (F5)
+
+Restore backup thất bại
+  - Đảm bảo file backup_20260405.sql tồn tại
+  - Kiểm tra permission đọc file
+  - Sử dụng đường dẫn tuyệt đối nếu cần
+  - Command: mysql -u root -p < C:\path\to\backup_20260405.sql
 
 ================================================================================
 Last Updated: 2026-04-24

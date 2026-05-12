@@ -27,7 +27,7 @@ services:
       - DB_HOST=mysql-db
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASS=rootpassword
+      - DB_PASSWORD=rootpassword
       - DB_NAME=user_db
     depends_on:
       - mysql-db
