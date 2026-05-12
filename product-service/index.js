@@ -49,17 +49,22 @@ app.get("/products/:id", async (req, res) => {
 // Thêm sản phẩm mới vào kho
 app.post("/products", async (req, res) => {
     try {
-        // Giả sử bảng products có các cột: name, price, stock
-        const { name, price, stock } = req.body;
-        
+        const { category_id, name, price, stock } = req.body;
+
+        if (!category_id || !name || price === undefined || stock === undefined) {
+            return res.status(400).json({
+                message: "Missing required fields: category_id, name, price, stock"
+            });
+        }
+
         const [result] = await db.query(
-            "INSERT INTO products (name, price, stock) VALUES (?, ?, ?)", 
-            [name, price, stock]
+            "INSERT INTO products (category_id, name, price, stock) VALUES (?, ?, ?, ?)",
+            [category_id, name, price, stock]
         );
-        
-        res.status(201).json({ 
-            message: "Product created successfully", 
-            product_id: result.insertId 
+
+        res.status(201).json({
+            message: "Product created successfully",
+            product_id: result.insertId
         });
     } catch (err) {
         res.status(500).json({ error: err.message });
