@@ -65,8 +65,8 @@ INSERT INTO products (category_id, name, description, price, cost, stock, sku, s
 (5, 'Gaming Mouse Razer DeathAdder', 'RGB, 16000 DPI', 1290000, 800000, 25, 'RAZ-DA-001', 'active');
 
 INSERT INTO product_reviews (product_id, user_id, rating, comment) VALUES
-(1, 1, 5, 'Sản phẩm rất tốt, giao hàng nhanh'),
-(1, 2, 4, 'Chất lượng tốt, giá hợp lý'),
-(2, 3, 5, 'Chuột rất nhạy, rất hài lòng'),
-(3, 1, 4, 'Bàn phím gõ rất thoải mái'),
-(4, 2, 5, 'Màn hình sắc nét, giá cả hợp lý');
+(1, 1, 5, 'San pham rat tot, giao hang nhanh'),
+(1, 2, 4, 'Chat luong tot, gia hop ly'),
+(2, 3, 5, 'Chuot rat nhay, rat hai long'),
+(3, 1, 4, 'Ban phim go rat thoai mai'),
+(4, 2, 5, 'Man hinh sac net, gia ca hop ly');
