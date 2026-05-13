@@ -48,18 +48,18 @@ CREATE TABLE product_inventory (
 );
 
 INSERT INTO categories (name, description) VALUES
-('Laptop', 'Máy tính xách tay'),
-('Phụ kiện', 'Phụ kiện máy tính'),
-('Màn hình', 'Thiết bị hiển thị'),
-('Lưu trữ', 'Thiết bị lưu trữ dữ liệu'),
-('Gaming', 'Thiết bị gaming');
+('Laptop', 'May tinh xach tay'),
+('Phu kien', 'Phu kien may tinh'),
+('Man hinh', 'Thiet bi hien thi'),
+('Luu tru', 'Thiet bi luu tru du lieu'),
+('Gaming', 'Thiet bi gaming');
 
 INSERT INTO products (category_id, name, description, price, cost, stock, sku, status) VALUES
 (1, 'Laptop Acer Aspire 5', 'Intel Core i5, 8GB RAM, 512GB SSD', 15990000, 12000000, 12, 'ACER-AS5-001', 'active'),
-(2, 'Mouse Logitech M331', 'Chuột wireless 2.4GHz', 350000, 200000, 50, 'LOG-M331-001', 'active'),
-(2, 'Keyboard Keychron K2', 'Bàn phím cơ wireless', 2190000, 1500000, 20, 'KEY-K2-001', 'active'),
+(2, 'Mouse Logitech M331', 'Chuot wireless 2.4GHz', 350000, 200000, 50, 'LOG-M331-001', 'active'),
+(2, 'Keyboard Keychron K2', 'Ban phim co wireless', 2190000, 1500000, 20, 'KEY-K2-001', 'active'),
 (3, 'Monitor Dell 24 inch', 'Full HD 1920x1080, 60Hz', 3890000, 2500000, 15, 'DELL-24-001', 'active'),
-(2, 'USB-C Hub 7 in 1', 'Hub mở rộng cổng', 690000, 400000, 30, 'HUB-USB-001', 'active'),
+(2, 'USB-C Hub 7 in 1', 'Hub mo rong cong', 690000, 400000, 30, 'HUB-USB-001', 'active'),
 (1, 'Laptop Dell XPS 13', 'Intel Core i7, 16GB RAM, 512GB SSD', 25990000, 20000000, 8, 'DELL-XPS13-001', 'active'),
 (3, 'Monitor ASUS 27 inch', '4K 3840x2160, 60Hz', 8990000, 6000000, 5, 'ASUS-27-001', 'active'),
 (5, 'Gaming Mouse Razer DeathAdder', 'RGB, 16000 DPI', 1290000, 800000, 25, 'RAZ-DA-001', 'active');
