@@ -74,6 +74,20 @@ services:
     networks:
       - microservices-network
 
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - user-service
+      - product-service
+      - order-service
+    networks:
+      - microservices-network
+
 networks:
   microservices-network:
     driver: bridge
